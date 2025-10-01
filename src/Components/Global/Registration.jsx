@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
     User,
     Mail,
@@ -40,7 +40,14 @@ export const RegisterPage = () => {
     const { theme, setTheme } = useContext(ThemeContext)
     const navigate = useNavigate()
 
-    // handle Form Data
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        })
+    }, [])
+
     function handleFormData(e) {
         const { name, value } = e.target;
 
@@ -137,7 +144,7 @@ export const RegisterPage = () => {
                     }
                     else if (error.code === "auth/email-already-in-use") {
                         toast.error("Email already register");
-                        navigate('/')
+                        // navigate('/')
                     }
                     else {
                         toast.error("Something went wrong: " + error.message);
@@ -155,7 +162,6 @@ export const RegisterPage = () => {
         <div className={`min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 ${theme === 'dark' ? 'bg-gray-900' : 'bg-gradient-to-br from-green-50 to-emerald-100'}`}>
             <div className={`relative max-w-md w-full space-y-8 ${theme === 'dark' ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'} p-8 rounded-2xl border shadow-xl`}>
 
-                {/* Header */}
                 <div className="text-center">
                     <div className={`mx-auto h-16 w-16 flex items-center justify-center rounded-full ${theme === 'dark' ? 'bg-green-600' : 'bg-green-100'}`}>
                         <UserPlus className={`h-8 w-8 ${theme === 'dark' ? 'text-white' : 'text-green-600'}`} />
@@ -174,7 +180,6 @@ export const RegisterPage = () => {
 
                 <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
 
-                    {/* Username Input */}
                     <div>
                         <label className={`block text-sm font-medium mb-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
                             Username
@@ -203,7 +208,6 @@ export const RegisterPage = () => {
                         )}
                     </div>
 
-                    {/* Email Input */}
                     <div>
                         <label className={`block text-sm font-medium mb-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
                             Email Address
@@ -232,7 +236,6 @@ export const RegisterPage = () => {
                         )}
                     </div>
 
-                    {/* Password Input */}
                     <div>
                         <label className={`block text-sm font-medium mb-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
                             Password
@@ -275,7 +278,6 @@ export const RegisterPage = () => {
                         </div>
                     </div>
 
-                    {/* Submit Button */}
                     <button
                         type="submit"
                         disabled={isLoading}
@@ -296,7 +298,6 @@ export const RegisterPage = () => {
                     </button>
                 </form>
 
-                {/* Footer */}
                 <div className="text-center">
                     <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
                         Already have an account?{" "}

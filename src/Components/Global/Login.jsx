@@ -174,9 +174,6 @@ export const LoginPage = () => {
                     </div>
 
                     <div className="relative mt-8">
-                        <div className="absolute inset-0 flex items-center">
-                            <div className={`w-full border-t ${theme === 'dark' ? 'border-gray-700' : 'border-gray-300'}`}></div>
-                        </div>
                         <div className="relative flex justify-center text-sm sm:text-base">
                             <span className={`px-2 ${theme === 'dark' ? 'bg-gray-800 text-gray-400' : 'bg-white text-gray-500'}`}>
                                 Or login with email
