@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { Eye, EyeOff, Mail, Lock, Building, Sun, Moon, Github, Chrome, ChromeIcon, AlignStartHorizontal } from 'lucide-react';
 import { ThemeContext } from './Theme';
-import { NavLink, useNavigate } from 'react-router';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { getAuth, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, GithubAuthProvider } from 'firebase/auth';
 import { Firebase } from "./Firebase";
 import { toast } from 'react-toastify';

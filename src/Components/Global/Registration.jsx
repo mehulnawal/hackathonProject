@@ -13,12 +13,12 @@ import {
 } from "lucide-react";
 import { ThemeContext } from "./Theme";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { getDatabase, ref, set } from 'firebase/database';
 import { Firebase } from "./Firebase";
 import { toast } from "react-toastify";
 
 export const RegisterPage = () => {
     const [showPassword, setShowPassword] = useState(false);
-    const [user, setUser] = useState(null)
     const [isLoading, setIsLoading] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
@@ -114,8 +114,13 @@ export const RegisterPage = () => {
             setIsLoading(true);
             const auth = getAuth(Firebase);
             createUserWithEmailAndPassword(auth, formData.email, formData.password)
-                .then((userdata) => {
-                    setUser(userdata.user);
+                .then(async (userCredential) => {
+                    const db = getDatabase(Firebase)
+                    const user = userCredential.user
+                    await set(ref(db, `usersData/${user.uid}`), {
+                        name: formData.name,
+                        email: formData.email,
+                    });
                     toast.success("Account created")
                 })
                 .catch((error) => {
@@ -135,7 +140,7 @@ export const RegisterPage = () => {
                         navigate('/')
                     }
                     else {
-                        toast.success("Something went wrong: " + error.message);
+                        toast.error("Something went wrong: " + error.message);
                     }
                 })
                 .finally(
